@@ -1,9 +1,10 @@
 # Kubernetes Guidelines
 
 ## Creating Kubernetes Cluster
-Below link can be used as a reference to setup a kubernetes cluster. 
+Below links can be used as a reference to setup a kubernetes cluster. 
 
-https://phoenixnap.com/kb/install-kubernetes-on-ubuntu https://computingforgeeks.com/deploy-kubernetes-cluster-on-ubuntu-with-kubeadm/
+- https://phoenixnap.com/kb/install-kubernetes-on-ubuntu 
+- https://computingforgeeks.com/deploy-kubernetes-cluster-on-ubuntu-with-kubeadm/
 
 ## View all kubernetes resources
 ```
