@@ -1272,8 +1272,6 @@ helm install prod-fleet . --set development=false --set nodePort=30012
 
 ## Helpful Commands
 
-## Commands
-
 1. Creation of pods
 ```
 kubectl run nginx-pod --image=nginx
