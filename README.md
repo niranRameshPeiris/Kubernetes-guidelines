@@ -864,8 +864,7 @@ roleRef:
  name: secret-cr
  apiGroup: rbac.authorization.k8s.io
 ```
-4. Testing the ServiceAccount
-Creating a pod with a ServiceAccount 
+4. Creating a pod with a ServiceAccount 
 ```
 apiVersion: v1
 kind: Pod
@@ -877,18 +876,18 @@ spec:
   - name: satest
     image: nginx
 ```
-Exec to the pod
+5. Exec to the pod
 ```
 kubectl exec -it sapod -- sh
 ```
-Check the kubernetes token inside the container
+6. Check the kubernetes token inside the container
 ```
 cd /var/run/secrets/kubernetes.io/serviceaccount
 ```
 ```
 TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
 ```
-Invoking the kubeapi server to get pods
+7. Invoking the kubeapi server to get pods
 ```
 curl -ssSk -H "Authorization: Bearer $TOKEN" https://kubernetes.default:443/api/v1/namespaces/default/pods
 ```
@@ -908,7 +907,7 @@ Result
   "code": 403
 }
 ```
-It doesn't give any result. Then invoke the kubeapi server to get secrets
+8. It doesn't give any result. Then invoke the kubeapi server to get secrets
 ```
 curl -ssSk -H "Authorization: Bearer $TOKEN" https://kubernetes.default:443/api/v1/namespaces/default/secrets
 ```
@@ -1097,7 +1096,8 @@ monitoring      default         1               2023-03-03 04:10:47.812821918 +0
 ```
 ### How to Install Prometheus and Grafana
 Get Helm Repository Info
-`https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack`
+- https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+
 Adding the repository
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -1137,7 +1137,8 @@ helm upgrade monitoring prometheus-community/kube-prometheus-stack --set grafana
 ```
 ### How to write a values.yaml file
 > Edit monitoring-grafana svc through values.yaml file
-Make the chnages in values.yaml file and execute below command. 
+
+Make the changes in values.yaml file and execute below command. 
 ```
 helm upgrade monitoring prometheus-community/kube-prometheus-stack --values=values.yaml
 ```
