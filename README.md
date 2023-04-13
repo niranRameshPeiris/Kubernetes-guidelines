@@ -6,15 +6,15 @@ Below links can be used as a reference to setup a kubernetes cluster.
 - https://phoenixnap.com/kb/install-kubernetes-on-ubuntu 
 - https://computingforgeeks.com/deploy-kubernetes-cluster-on-ubuntu-with-kubeadm/
 
-## View all kubernetes resources
+### View all kubernetes resources
 ```
 kubectl api-resources
 ```
-## Get HELP
+### Get HELP
 ```
 kubectl run --help
 ```
-## Delete something
+### Delete something
 ```
 kubectl delete svc servicename
 ```
