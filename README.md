@@ -28,13 +28,9 @@ Using command
 ```
 kubectl run <name-of-pod> --image=<image>
 ```
-View pod yaml without creating pod
+View pod yaml without a creating pod
 ```
 kubectl run <name-of-pod> --image=<image> --dry-run=client -o yaml > pod.yaml
-```
-Change pod image
-```
-kubectl set image pod <pod-name> <current-image>=<new-image>
 ```
 Edit pod
 ```
@@ -144,11 +140,11 @@ kubectl get pods -A
 ```
 kubectl get pods --all-namespaces
 ```
-List pods under a namespacse
+List pods under a namespace
 ```
 kubectl get pods -n mynamespace
 ```
-Create a pod in a differenet namespace
+Create a pod under a namespace
 ```
 kubectl run ntest --image=nginx -n mynamespace
 ```
@@ -161,7 +157,7 @@ kubectl run niranpod --image=nginx --dry-run=client -o yaml
 ```
 kubectl run niranpod --image=nginx --dry-run=client -o yaml >> info.yaml
 ```
-2. Create pod.
+2. Create pod
 ```
 kubectl create -f info.yaml
 ```
@@ -225,11 +221,11 @@ kubectl create -f info.yaml
 kubectl get svc
 ```
 ### Expose the service to outside
-1. Delete the previous service.
+1. Delete the previous service
 ```
 kubectl delete svc basicservice
 ```
-2. Change the type.
+2. Change the type
 ```
 apiVersion: v1
 kind: Service
@@ -246,7 +242,7 @@ spec:
 ```
 kubectl create -f service.yaml 
 ```
-4. Access via the public IP.
+4. Access via the public IP
 ```
 curl <public-ip>:<node-port>
 ```
@@ -289,11 +285,11 @@ spec:
 ```
 
 ## Ingress
-Create a pod
+1. Create a pod
 ```
 kubectl run ingresspod --image=nginx
 ```
-Create service 
+2. Create service 
 ```
 apiVersion: v1
 kind: Service
@@ -306,11 +302,11 @@ spec:
     - protocol: TCP
       port: 80
 ```
-Map the service
+3. Map the service
 ```
 kubectl label pod inpod ex=ingressexample
 ```
-Creating a ingress
+4. Creating an ingress
 ```
 kubectl create ingress demo --class=nginx --rule="test.com/*=ingresssvc:80"
 ```
@@ -334,11 +330,11 @@ spec:
         path: /
         pathType: Prefix
 ```
-Now, forward a local port to the ingress controller:
+5. Now, forward a local port to the ingress controller:
 ```
 kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 8080:80
 ```
-Access the pod
+6. Access the pod
 ```
 curl http://test.com:8080/
 ```
@@ -416,7 +412,7 @@ spec:
 ```
 - periodSeconds - specifies that the kubelet should perform a liveness probe every 5 seconds. 
 - initialDelaySeconds - tells the kubelet that it should wait 5 seconds before performing the first probe. 
-- To perform a probe, the kubelet executes the command cat /tmp/healthy in the target container. 
+- To perform a probe, the kubelet executes the command cat /tmp/niran in the target container. 
 - If the command succeeds, it returns 0, and the kubelet considers the container to be alive and healthy. 
 - If the command returns a non-zero value, the kubelet kills the container and restarts it.
 
@@ -552,9 +548,7 @@ spec:
             name: colors
             key: test
 ```
-This pod will create an enviroment variable name TEST_ENV which contains the value from colors configmap
-
-Check enviriment variables
+Check the enviroment variables
 ```
 kubectl exec -it podname -- /bin/bash -c 'env'
 ```
@@ -578,7 +572,7 @@ Install NFS on second node.
 ```
 sudo apt-get -y install nfs-common nfs-kernel-server
 ```
-Test and see the exported directory using showmount from you second node
+Test and see the exported directory using showmount from your second node
 ```
 showmount -e hostname-of-the-node-one
 ```
@@ -603,7 +597,7 @@ spec:
     server: mycp
     readOnly: false
 ```
-Now persistent volume claim (pvc) can will be needed to use this in a Pod.  
+Now persistent volume claim (pvc) will be needed to use the PV in a Pod.  
 ### Create a PersistentVolumeClaim
 ```
 apiVersion: v1
@@ -684,7 +678,7 @@ kubectl apply -f pod.yaml
 ```
 kubectl rollout history deployment testrollout
 ```
-4. Compare the output of therollout history for the two revisions
+4. Compare the output of the rollout history for the two revisions
 ```
 kubectl rollout history deployment testrollout --revision=1
 ```
@@ -855,6 +849,7 @@ rules:
   - list
 ```
 This role will allow pod to list/get secrets 
+
 3. Creating a RoleBinding
 ```
 apiVersion: rbac.authorization.k8s.io/v1
